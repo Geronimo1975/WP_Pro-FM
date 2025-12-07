@@ -5,9 +5,11 @@ Content models for WordPress content management and AI generation.
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from .wpml import WPMLLanguage
+
 
 class Post(models.Model):
-    """WordPress Post synchronized and managed"""
+    """WordPress Post synchronized and managed with WPML multilingual support"""
 
     class PostStatus(models.TextChoices):
         DRAFT = 'draft', _('Draft')
@@ -64,14 +66,34 @@ class Post(models.Model):
     meta_description = models.CharField(_('Meta Description'), max_length=200, blank=True)
     seo_score = models.IntegerField(_('SEO Score'), null=True, blank=True)
 
-    # Language (WPML)
-    language = models.CharField(_('Language'), max_length=10, default='de')
+    # WPML Language & Translation fields
+    language = models.CharField(
+        _('Language'),
+        max_length=10,
+        choices=WPMLLanguage.get_choices(),
+        default=WPMLLanguage.DEFAULT,
+        db_index=True
+    )
+    wpml_trid = models.IntegerField(
+        _('WPML Translation ID'),
+        null=True,
+        blank=True,
+        db_index=True,
+        help_text=_('Translation group ID linking all translations together')
+    )
     translation_of = models.ForeignKey(
         'self',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name='translations'
+        related_name='translations',
+        help_text=_('Original post this is a translation of')
+    )
+    source_language = models.CharField(
+        _('Source Language'),
+        max_length=10,
+        blank=True,
+        help_text=_('Language of the original content (empty if this is the original)')
     )
 
     # AI generation tracking
@@ -95,14 +117,55 @@ class Post(models.Model):
             models.Index(fields=['wp_id']),
             models.Index(fields=['status', 'post_type']),
             models.Index(fields=['language']),
+            models.Index(fields=['wpml_trid']),
+            models.Index(fields=['language', 'wpml_trid']),
         ]
 
     def __str__(self):
         return self.title
 
+    @property
+    def is_original(self) -> bool:
+        """Check if this post is the original (not a translation)"""
+        return not self.source_language and not self.translation_of
+
+    @property
+    def translation_group(self):
+        """Get all posts in the same translation group"""
+        if self.wpml_trid:
+            return Post.objects.filter(wpml_trid=self.wpml_trid)
+        if self.translation_of:
+            # Include original and all its translations
+            return Post.objects.filter(
+                models.Q(id=self.translation_of_id) |
+                models.Q(translation_of_id=self.translation_of_id)
+            )
+        # Return self and any translations of this post
+        return Post.objects.filter(
+            models.Q(id=self.id) | models.Q(translation_of_id=self.id)
+        )
+
+    def get_translation(self, language: str):
+        """Get translation of this post in specified language"""
+        if self.language == language:
+            return self
+        return self.translation_group.filter(language=language).first()
+
+    def get_available_translations(self) -> dict:
+        """Get dict of language -> post for all translations"""
+        translations = {}
+        for post in self.translation_group:
+            translations[post.language] = post
+        return translations
+
+    def get_missing_languages(self) -> list:
+        """Get list of languages without translations"""
+        available = set(self.get_available_translations().keys())
+        return [lang for lang in WPMLLanguage.AVAILABLE if lang not in available]
+
 
 class Category(models.Model):
-    """WordPress Category"""
+    """WordPress Category with WPML multilingual support"""
 
     wp_id = models.IntegerField(_('WordPress ID'), unique=True, null=True, blank=True)
     name = models.CharField(_('Name'), max_length=100)
@@ -115,32 +178,98 @@ class Category(models.Model):
         blank=True,
         related_name='children'
     )
-    language = models.CharField(_('Language'), max_length=10, default='de')
+
+    # WPML fields
+    language = models.CharField(
+        _('Language'),
+        max_length=10,
+        choices=WPMLLanguage.get_choices(),
+        default=WPMLLanguage.DEFAULT,
+        db_index=True
+    )
+    wpml_trid = models.IntegerField(
+        _('WPML Translation ID'),
+        null=True,
+        blank=True,
+        db_index=True
+    )
+    translation_of = models.ForeignKey(
+        'self',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='category_translations'
+    )
 
     class Meta:
         verbose_name = _('Category')
         verbose_name_plural = _('Categories')
         ordering = ['name']
+        indexes = [
+            models.Index(fields=['language']),
+            models.Index(fields=['wpml_trid']),
+        ]
 
     def __str__(self):
-        return self.name
+        return f"{self.name} [{self.language}]"
+
+    def get_translation(self, language: str):
+        """Get translation of this category in specified language"""
+        if self.language == language:
+            return self
+        if self.wpml_trid:
+            return Category.objects.filter(wpml_trid=self.wpml_trid, language=language).first()
+        return None
 
 
 class Tag(models.Model):
-    """WordPress Tag"""
+    """WordPress Tag with WPML multilingual support"""
 
     wp_id = models.IntegerField(_('WordPress ID'), unique=True, null=True, blank=True)
     name = models.CharField(_('Name'), max_length=100)
     slug = models.SlugField(_('Slug'), max_length=100)
-    language = models.CharField(_('Language'), max_length=10, default='de')
+
+    # WPML fields
+    language = models.CharField(
+        _('Language'),
+        max_length=10,
+        choices=WPMLLanguage.get_choices(),
+        default=WPMLLanguage.DEFAULT,
+        db_index=True
+    )
+    wpml_trid = models.IntegerField(
+        _('WPML Translation ID'),
+        null=True,
+        blank=True,
+        db_index=True
+    )
+    translation_of = models.ForeignKey(
+        'self',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='tag_translations'
+    )
 
     class Meta:
         verbose_name = _('Tag')
         verbose_name_plural = _('Tags')
         ordering = ['name']
+        indexes = [
+            models.Index(fields=['language']),
+            models.Index(fields=['wpml_trid']),
+        ]
 
     def __str__(self):
-        return self.name
+        return f"{self.name} [{self.language}]"
+
+    def get_translation(self, language: str):
+        """Get translation of this tag in specified language"""
+        if self.language == language:
+            return self
+        if self.wpml_trid:
+            return Tag.objects.filter(wpml_trid=self.wpml_trid, language=language).first()
+        return None
 
 
 class ContentTemplate(models.Model):

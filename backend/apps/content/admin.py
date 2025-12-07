@@ -1,23 +1,53 @@
 from django.contrib import admin
+from django.utils.html import format_html
+from django.urls import reverse
 from .models import Post, Category, Tag, ContentTemplate, ContentGenerationJob
+from .wpml import WPMLLanguage
+
+
+class TranslationInline(admin.TabularInline):
+    """Inline display of translations for a post"""
+    model = Post
+    fk_name = 'translation_of'
+    fields = ['language', 'title', 'status', 'wp_id']
+    readonly_fields = ['language', 'title', 'status', 'wp_id']
+    extra = 0
+    max_num = 0
+    can_delete = False
+    verbose_name = "Translation"
+    verbose_name_plural = "Translations"
+
+    def has_add_permission(self, request, obj=None):
+        return False
 
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['title', 'post_type', 'status', 'language', 'is_ai_generated', 'seo_score', 'created_at']
+    list_display = [
+        'title', 'post_type', 'status', 'language_badge', 'translation_status',
+        'is_ai_generated', 'seo_score', 'created_at'
+    ]
     list_filter = ['post_type', 'status', 'language', 'is_ai_generated', 'categories']
     search_fields = ['title', 'content', 'focus_keyword']
     prepopulated_fields = {'slug': ('title',)}
     filter_horizontal = ['categories', 'tags']
-    readonly_fields = ['wp_id', 'synced_at', 'created_at', 'updated_at']
+    readonly_fields = [
+        'wp_id', 'synced_at', 'created_at', 'updated_at',
+        'translation_links', 'wpml_trid'
+    ]
     date_hierarchy = 'created_at'
+    inlines = [TranslationInline]
 
     fieldsets = (
         (None, {
             'fields': ('title', 'slug', 'content', 'excerpt', 'featured_image')
         }),
         ('Status', {
-            'fields': ('post_type', 'status', 'language')
+            'fields': ('post_type', 'status')
+        }),
+        ('WPML Translation', {
+            'fields': ('language', 'translation_of', 'source_language', 'wpml_trid', 'translation_links'),
+            'description': 'Multilingual content settings powered by WPML'
         }),
         ('Taxonomy', {
             'fields': ('categories', 'tags')
@@ -40,21 +70,150 @@ class PostAdmin(admin.ModelAdmin):
         }),
     )
 
+    def language_badge(self, obj):
+        """Display language as a colored badge"""
+        colors = {
+            'de': '#000000',  # German - black
+            'en': '#0066cc',  # English - blue
+            'fr': '#0055a4',  # French - blue
+            'es': '#c60b1e',  # Spanish - red
+        }
+        color = colors.get(obj.language, '#666666')
+        lang_name = dict(WPMLLanguage.get_choices()).get(obj.language, obj.language)
+        return format_html(
+            '<span style="background-color: {}; color: white; padding: 2px 8px; '
+            'border-radius: 3px; font-size: 11px;">{}</span>',
+            color, lang_name
+        )
+    language_badge.short_description = 'Language'
+    language_badge.admin_order_field = 'language'
+
+    def translation_status(self, obj):
+        """Show translation status icons"""
+        if obj.is_original:
+            translations = obj.translations.all()
+            if translations.exists():
+                langs = [t.language for t in translations]
+                return format_html(
+                    '<span title="Original with translations: {}">📄 + {}</span>',
+                    ', '.join(langs), len(langs)
+                )
+            return format_html('<span title="Original, no translations">📄</span>')
+        else:
+            return format_html(
+                '<span title="Translation of post {}">🔗 {}</span>',
+                obj.translation_of_id, obj.source_language.upper()
+            )
+    translation_status.short_description = 'Translations'
+
+    def translation_links(self, obj):
+        """Display clickable links to all translations"""
+        translations = obj.get_available_translations()
+        links = []
+
+        for lang, post in translations.items():
+            if post.id == obj.id:
+                links.append(format_html(
+                    '<strong>{} (current)</strong>',
+                    dict(WPMLLanguage.get_choices()).get(lang, lang)
+                ))
+            else:
+                url = reverse('admin:content_post_change', args=[post.id])
+                links.append(format_html(
+                    '<a href="{}">{}: {}</a>',
+                    url,
+                    dict(WPMLLanguage.get_choices()).get(lang, lang),
+                    post.title[:30]
+                ))
+
+        missing = obj.get_missing_languages()
+        if missing:
+            for lang in missing:
+                links.append(format_html(
+                    '<span style="color: #999;">{}: <em>missing</em></span>',
+                    dict(WPMLLanguage.get_choices()).get(lang, lang)
+                ))
+
+        return format_html('<br>'.join(links)) if links else '-'
+    translation_links.short_description = 'All Translations'
+
+    def get_queryset(self, request):
+        """Optimize query with related translations"""
+        return super().get_queryset(request).select_related('translation_of').prefetch_related('translations')
+
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'parent', 'language', 'wp_id']
+    list_display = ['name', 'slug', 'parent', 'language_badge', 'translation_info', 'wp_id']
     list_filter = ['language', 'parent']
     search_fields = ['name', 'slug']
     prepopulated_fields = {'slug': ('name',)}
+    readonly_fields = ['wpml_trid']
+
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'slug', 'description', 'parent')
+        }),
+        ('WPML Translation', {
+            'fields': ('language', 'translation_of', 'wpml_trid')
+        }),
+        ('WordPress', {
+            'fields': ('wp_id',),
+            'classes': ('collapse',)
+        }),
+    )
+
+    def language_badge(self, obj):
+        lang_name = dict(WPMLLanguage.get_choices()).get(obj.language, obj.language)
+        return format_html(
+            '<span style="background-color: #666; color: white; padding: 2px 6px; '
+            'border-radius: 3px; font-size: 10px;">{}</span>',
+            lang_name
+        )
+    language_badge.short_description = 'Lang'
+
+    def translation_info(self, obj):
+        if obj.translation_of:
+            return format_html('🔗 {}', obj.translation_of.name)
+        return '-'
+    translation_info.short_description = 'Translation Of'
 
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'language', 'wp_id']
+    list_display = ['name', 'slug', 'language_badge', 'translation_info', 'wp_id']
     list_filter = ['language']
     search_fields = ['name', 'slug']
     prepopulated_fields = {'slug': ('name',)}
+    readonly_fields = ['wpml_trid']
+
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'slug')
+        }),
+        ('WPML Translation', {
+            'fields': ('language', 'translation_of', 'wpml_trid')
+        }),
+        ('WordPress', {
+            'fields': ('wp_id',),
+            'classes': ('collapse',)
+        }),
+    )
+
+    def language_badge(self, obj):
+        lang_name = dict(WPMLLanguage.get_choices()).get(obj.language, obj.language)
+        return format_html(
+            '<span style="background-color: #666; color: white; padding: 2px 6px; '
+            'border-radius: 3px; font-size: 10px;">{}</span>',
+            lang_name
+        )
+    language_badge.short_description = 'Lang'
+
+    def translation_info(self, obj):
+        if obj.translation_of:
+            return format_html('🔗 {}', obj.translation_of.name)
+        return '-'
+    translation_info.short_description = 'Translation Of'
 
 
 @admin.register(ContentTemplate)
