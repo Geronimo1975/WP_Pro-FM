@@ -41,6 +41,7 @@ docker compose exec backend pytest apps/content/tests/test_views.py::TestPostVie
 - **media/**: Media file management with file system watcher. Models: `MediaFile`, `MediaCollection`, `MediaSyncLog`
 - **seo/**: Keyword tracking, site audits, backlinks, IndexNow. Models: `Keyword`, `KeywordRankingHistory`, `SiteAudit`, `Backlink`, `IndexNowSubmission`
 - **email_marketing/**: Email campaigns and automation workflows. Models: `Subscriber`, `Campaign`, `EmailTemplate`, `AutomationWorkflow`, `AutomationStep`
+- **front_page/**: Homepage and Slider Revolution management. Models: `SliderRevolution`, `Slide`, `SlideLayer`, `HomepageSection`, `HomepageSectionItem`, `FrontPageSettings`
 
 ### Key Modules
 
@@ -54,6 +55,7 @@ All REST endpoints prefixed with `/api/`:
 - `/api/media/` - Files, collections, sync logs
 - `/api/seo/` - Keywords, audits, backlinks, IndexNow
 - `/api/email/` - Subscribers, campaigns, templates, automations
+- `/api/front-page/` - Sliders, slides, homepage sections, settings
 
 Admin interface at `/admin/`
 
