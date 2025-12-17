@@ -13,6 +13,7 @@ urlpatterns = [
     path('api/content/', include('apps.content.urls')),
     path('api/seo/', include('apps.seo.urls')),
     path('api/email/', include('apps.email_marketing.urls')),
+    path('api/front-page/', include('apps.front_page.urls')),
 ]
 
 if settings.DEBUG:

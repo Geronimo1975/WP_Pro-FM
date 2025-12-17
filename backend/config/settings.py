@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'apps.content',
     'apps.seo',
     'apps.email_marketing',
+    'apps.front_page',
 ]
 
 MIDDLEWARE = [
