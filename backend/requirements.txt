@@ -4,6 +4,9 @@ djangorestframework>=3.14
 django-cors-headers>=4.3
 django-filter>=23.5
 
+# Admin UI Enhancement
+django-unfold>=0.40
+
 # Database
 psycopg2-binary>=2.9
 

@@ -5,6 +5,8 @@ Admin configuration for Front Page management.
 from django.contrib import admin
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
+from unfold.admin import ModelAdmin, TabularInline
+from unfold.decorators import display
 
 from .models import (
     SliderRevolution,
@@ -16,7 +18,7 @@ from .models import (
 )
 
 
-class SlideLayerInline(admin.TabularInline):
+class SlideLayerInline(TabularInline):
     """Inline admin for slide layers"""
     model = SlideLayer
     extra = 0
@@ -25,29 +27,33 @@ class SlideLayerInline(admin.TabularInline):
         'animation_in', 'start_time', 'visible_desktop', 'visible_tablet', 'visible_mobile'
     ]
     ordering = ['order']
+    tab = True
 
 
-class SlideInline(admin.TabularInline):
+class SlideInline(TabularInline):
     """Inline admin for slides"""
     model = Slide
     extra = 0
     fields = ['title', 'order', 'status', 'duration', 'transition']
     ordering = ['order']
     show_change_link = True
+    tab = True
 
 
 @admin.register(SliderRevolution)
-class SliderRevolutionAdmin(admin.ModelAdmin):
+class SliderRevolutionAdmin(ModelAdmin):
     """Admin for Slider Revolution"""
 
     list_display = [
-        'name', 'slider_type', 'language', 'is_active',
+        'name', 'slider_type_display', 'language_display', 'active_status',
         'slides_count', 'shortcode_display', 'updated_at'
     ]
     list_filter = ['is_active', 'slider_type', 'language']
+    list_filter_submit = True
     search_fields = ['name', 'wp_alias', 'description']
     readonly_fields = ['shortcode', 'created_at', 'updated_at', 'synced_at']
     inlines = [SlideInline]
+    list_per_page = 25
 
     fieldsets = (
         (None, {
@@ -87,26 +93,42 @@ class SliderRevolutionAdmin(admin.ModelAdmin):
     def shortcode_display(self, obj):
         if obj.shortcode:
             return format_html(
-                '<code style="background:#f4f4f4;padding:2px 6px;">{}</code>',
+                '<code style="background:#f4f4f4;padding:2px 6px;border-radius:4px;">{}</code>',
                 obj.shortcode
             )
         return '-'
     shortcode_display.short_description = _('Shortcode')
 
+    @display(description="Type", ordering="slider_type", label=True)
+    def slider_type_display(self, obj):
+        return obj.slider_type.title() if obj.slider_type else '-', "secondary"
+
+    @display(description="Lang", ordering="language", label=True)
+    def language_display(self, obj):
+        return obj.language.upper() if obj.language else '-', "secondary"
+
+    @display(description="Status", label=True)
+    def active_status(self, obj):
+        if obj.is_active:
+            return "Active", "success"
+        return "Inactive", "secondary"
+
 
 @admin.register(Slide)
-class SlideAdmin(admin.ModelAdmin):
+class SlideAdmin(ModelAdmin):
     """Admin for Slides"""
 
     list_display = [
-        'title', 'slider', 'order', 'status', 'duration',
+        'title', 'slider', 'order', 'status_display', 'duration',
         'transition', 'has_cta', 'layers_count', 'updated_at'
     ]
     list_filter = ['status', 'slider', 'transition']
+    list_filter_submit = True
     search_fields = ['title', 'subtitle', 'content_html']
-    list_editable = ['order', 'status']
+    list_editable = ['order']
     raw_id_fields = ['slider', 'background_image']
     inlines = [SlideLayerInline]
+    list_per_page = 25
 
     fieldsets = (
         (None, {
@@ -145,6 +167,15 @@ class SlideAdmin(admin.ModelAdmin):
     )
     readonly_fields = ['created_at', 'updated_at']
 
+    @display(description="Status", ordering="status", label=True)
+    def status_display(self, obj):
+        colors = {
+            'published': 'success',
+            'draft': 'warning',
+            'scheduled': 'info',
+        }
+        return obj.status.title() if obj.status else '-', colors.get(obj.status, 'secondary')
+
     def has_cta(self, obj):
         return bool(obj.cta_text)
     has_cta.boolean = True
@@ -156,17 +187,19 @@ class SlideAdmin(admin.ModelAdmin):
 
 
 @admin.register(SlideLayer)
-class SlideLayerAdmin(admin.ModelAdmin):
+class SlideLayerAdmin(ModelAdmin):
     """Admin for Slide Layers"""
 
     list_display = [
-        'name', 'slide', 'layer_type', 'order',
+        'name', 'slide', 'layer_type_display', 'order',
         'animation_in', 'start_time', 'responsive_display'
     ]
     list_filter = ['layer_type', 'animation_in', 'slide__slider']
+    list_filter_submit = True
     search_fields = ['name', 'content']
     list_editable = ['order']
     raw_id_fields = ['slide', 'media_file']
+    list_per_page = 25
 
     fieldsets = (
         (None, {
@@ -196,39 +229,46 @@ class SlideLayerAdmin(admin.ModelAdmin):
         }),
     )
 
+    @display(description="Type", ordering="layer_type", label=True)
+    def layer_type_display(self, obj):
+        return obj.layer_type.title() if obj.layer_type else '-', "secondary"
+
     def responsive_display(self, obj):
         icons = []
         if obj.visible_desktop:
-            icons.append('🖥️')
+            icons.append('Desktop')
         if obj.visible_tablet:
-            icons.append('📱')
+            icons.append('Tablet')
         if obj.visible_mobile:
-            icons.append('📲')
-        return ' '.join(icons) or '-'
+            icons.append('Mobile')
+        return ', '.join(icons) or '-'
     responsive_display.short_description = _('Visible')
 
 
-class HomepageSectionItemInline(admin.TabularInline):
+class HomepageSectionItemInline(TabularInline):
     """Inline admin for section items"""
     model = HomepageSectionItem
     extra = 0
     fields = ['title', 'order', 'is_active', 'icon_class', 'link_url']
     ordering = ['order']
+    tab = True
 
 
 @admin.register(HomepageSection)
-class HomepageSectionAdmin(admin.ModelAdmin):
+class HomepageSectionAdmin(ModelAdmin):
     """Admin for Homepage Sections"""
 
     list_display = [
-        'name', 'section_type', 'language', 'order',
-        'is_active', 'items_count', 'updated_at'
+        'name', 'section_type_display', 'language_display', 'order',
+        'active_status', 'items_count', 'updated_at'
     ]
     list_filter = ['is_active', 'section_type', 'language']
+    list_filter_submit = True
     search_fields = ['name', 'title', 'description']
-    list_editable = ['order', 'is_active']
+    list_editable = ['order']
     raw_id_fields = ['slider', 'background_image', 'translation_of']
     inlines = [HomepageSectionItemInline]
+    list_per_page = 25
 
     fieldsets = (
         (None, {
@@ -272,23 +312,39 @@ class HomepageSectionAdmin(admin.ModelAdmin):
     )
     readonly_fields = ['created_at', 'updated_at']
 
+    @display(description="Type", ordering="section_type", label=True)
+    def section_type_display(self, obj):
+        return obj.section_type.replace('_', ' ').title() if obj.section_type else '-', "secondary"
+
+    @display(description="Lang", ordering="language", label=True)
+    def language_display(self, obj):
+        return obj.language.upper() if obj.language else '-', "secondary"
+
+    @display(description="Status", label=True)
+    def active_status(self, obj):
+        if obj.is_active:
+            return "Active", "success"
+        return "Inactive", "secondary"
+
     def items_count(self, obj):
         return obj.items.count()
     items_count.short_description = _('Items')
 
 
 @admin.register(HomepageSectionItem)
-class HomepageSectionItemAdmin(admin.ModelAdmin):
+class HomepageSectionItemAdmin(ModelAdmin):
     """Admin for Homepage Section Items"""
 
     list_display = [
-        'title', 'section', 'order', 'is_active',
+        'title', 'section', 'order', 'active_status',
         'has_image', 'has_link', 'updated_at'
     ]
     list_filter = ['is_active', 'section__section_type', 'section']
+    list_filter_submit = True
     search_fields = ['title', 'subtitle', 'description']
-    list_editable = ['order', 'is_active']
+    list_editable = ['order']
     raw_id_fields = ['section', 'image']
+    list_per_page = 25
 
     fieldsets = (
         (None, {
@@ -319,6 +375,12 @@ class HomepageSectionItemAdmin(admin.ModelAdmin):
     )
     readonly_fields = ['created_at', 'updated_at']
 
+    @display(description="Status", label=True)
+    def active_status(self, obj):
+        if obj.is_active:
+            return "Active", "success"
+        return "Inactive", "secondary"
+
     def has_image(self, obj):
         return bool(obj.image)
     has_image.boolean = True
@@ -331,12 +393,14 @@ class HomepageSectionItemAdmin(admin.ModelAdmin):
 
 
 @admin.register(FrontPageSettings)
-class FrontPageSettingsAdmin(admin.ModelAdmin):
+class FrontPageSettingsAdmin(ModelAdmin):
     """Admin for Front Page Settings"""
 
-    list_display = ['language', 'wp_page_id', 'main_slider', 'header_style', 'updated_at']
+    list_display = ['language_display', 'wp_page_id', 'main_slider', 'header_style', 'updated_at']
     list_filter = ['language', 'header_style']
+    list_filter_submit = True
     raw_id_fields = ['main_slider', 'og_image', 'header_logo_light', 'header_logo_dark']
+    list_per_page = 25
 
     fieldsets = (
         (None, {
@@ -361,3 +425,7 @@ class FrontPageSettingsAdmin(admin.ModelAdmin):
         }),
     )
     readonly_fields = ['created_at', 'updated_at']
+
+    @display(description="Language", ordering="language", label=True)
+    def language_display(self, obj):
+        return obj.language.upper() if obj.language else '-', "primary"
