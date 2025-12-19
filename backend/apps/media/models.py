@@ -65,6 +65,31 @@ class MediaFile(models.Model):
     def __str__(self):
         return self.title or self.filename
 
+    def save(self, *args, **kwargs):
+        # Track if file changed
+        if self.pk:
+            try:
+                old = MediaFile.objects.get(pk=self.pk)
+                if old.file != self.file and self.file:
+                    # New file uploaded - mark as needing sync
+                    self.is_local = True
+                    self.is_synced = False
+            except MediaFile.DoesNotExist:
+                pass
+
+        # Set is_local if file exists
+        if self.file:
+            self.is_local = True
+
+        # Update file_size if file exists
+        if self.file and hasattr(self.file, 'size'):
+            try:
+                self.file_size = self.file.size
+            except:
+                pass
+
+        super().save(*args, **kwargs)
+
     @property
     def is_image(self):
         return self.media_type == self.MediaType.IMAGE

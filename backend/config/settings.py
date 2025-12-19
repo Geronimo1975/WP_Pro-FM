@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'apps.seo',
     'apps.email_marketing',
     'apps.front_page',
+    'apps.glossary',
 ]
 
 MIDDLEWARE = [
@@ -142,6 +143,12 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = os.environ.get(
     'CORS_ALLOWED_ORIGINS',
     'http://localhost:3000,http://127.0.0.1:3000'
+).split(',')
+
+# CSRF Trusted Origins (required for admin behind reverse proxy)
+CSRF_TRUSTED_ORIGINS = os.environ.get(
+    'CSRF_TRUSTED_ORIGINS',
+    'http://localhost:8000,http://127.0.0.1:8000'
 ).split(',')
 
 # Celery Configuration
@@ -303,6 +310,28 @@ UNFOLD = {
                         "title": _("Front Page Settings"),
                         "icon": "settings",
                         "link": reverse_lazy("admin:front_page_frontpagesettings_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": _("Glossar"),
+                "separator": True,
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("Glossary Terms"),
+                        "icon": "menu_book",
+                        "link": reverse_lazy("admin:glossary_glossaryterm_changelist"),
+                    },
+                    {
+                        "title": _("Categories"),
+                        "icon": "category",
+                        "link": reverse_lazy("admin:glossary_glossarycategory_changelist"),
+                    },
+                    {
+                        "title": _("Sync Logs"),
+                        "icon": "sync",
+                        "link": reverse_lazy("admin:glossary_glossarysynclog_changelist"),
                     },
                 ],
             },
