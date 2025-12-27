@@ -1,0 +1,92 @@
+{
+  "site": {
+    "name": "ProFM24",
+    "domain": "profm24.de",
+    "url": "https://profm24.de"
+  },
+  "geolocation": {
+    "country": "Germany",
+    "region": "Nationwide",
+    "language": "de",
+    "locale": "de_DE"
+  },
+  "niche": {
+    "primary": "Facility Management",
+    "secondary": ["Gebäudemanagement", "Property Management", "Building Services"]
+  },
+  "keywords": {
+    "primary": [
+      "Facility Management",
+      "Facility Management Deutschland",
+      "Facility Management Dienstleistungen",
+      "Gebäudemanagement",
+      "Gebäudemanagement Firma",
+      "Property Management",
+      "Immobilienverwaltung",
+      "Objektbetreuung",
+      "Hausmeisterservice",
+      "Technisches Facility Management"
+    ],
+    "services": [
+      "Gebäudereinigung",
+      "Industriereinigung",
+      "Büroreinigung",
+      "Unterhaltsreinigung",
+      "Grundreinigung",
+      "Glasreinigung",
+      "Fassadenreinigung",
+      "Winterdienst",
+      "Grünflächenpflege",
+      "Außenanlagenpflege"
+    ],
+    "technical": [
+      "Technische Gebäudeausrüstung",
+      "Wartung und Instandhaltung",
+      "Heizungswartung",
+      "Klimaanlagenwartung",
+      "Elektroinstallation",
+      "Sanitärinstallation",
+      "Gebäudetechnik",
+      "Energiemanagement",
+      "Gebäudeautomation",
+      "Smart Building"
+    ],
+    "construction": [
+      "Sanierung",
+      "Renovierung",
+      "Umbau",
+      "Innenausbau",
+      "Trockenbau",
+      "Malerarbeiten",
+      "Bodenbeläge",
+      "Projektmanagement Bau",
+      "Generalunternehmer",
+      "Bauleitung"
+    ],
+    "commercial": [
+      "Gewerbliche Dienstleistungen",
+      "Facility Services",
+      "Gebäudeservice",
+      "Full-Service Facility Management",
+      "Integriertes Facility Management",
+      "FM Outsourcing",
+      "Betreiberverantwortung",
+      "Kostenoptimierung Gebäude",
+      "Nachhaltige Gebäudebewirtschaftung",
+      "Flächenmanagement"
+    ]
+  },
+  "competitors": [
+    "dussmann.com",
+    "wisag.de",
+    "strabag-pfs.com",
+    "apleona.com",
+    "gegenbauer.de"
+  ],
+  "seo_settings": {
+    "focus_keyword_density": "1-2%",
+    "meta_title_max_length": 60,
+    "meta_description_max_length": 155,
+    "target_domain_authority": 40
+  }
+}
