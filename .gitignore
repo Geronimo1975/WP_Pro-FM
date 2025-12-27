@@ -50,6 +50,11 @@ db.sqlite3-journal
 /media/*.svg
 /media/downloads/
 
+# Standalone scripts and data (root level)
+/homepage_content.csv
+/update_homepage_content.py
+/*.csv
+
 # Static files collected
 staticfiles/
 
