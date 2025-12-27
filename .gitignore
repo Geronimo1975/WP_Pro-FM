@@ -41,6 +41,15 @@ db.sqlite3-journal
 *.pot
 *.pyc
 
+# Media files (downloaded/uploaded)
+/media/*.jpg
+/media/*.jpeg
+/media/*.png
+/media/*.gif
+/media/*.webp
+/media/*.svg
+/media/downloads/
+
 # Static files collected
 staticfiles/
 
