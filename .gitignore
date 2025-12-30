@@ -110,6 +110,12 @@ yarn-error.log*
 # Jupyter Notebooks
 .ipynb_checkpoints/
 
+# Backup files
+*backup*.json
+*backup*.html
+translation_report.json
+translated_content.html
+
 # Google credentials
 google_credentials.json
 *credentials*.json
