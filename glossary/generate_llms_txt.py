@@ -251,9 +251,9 @@ Für programmatischen Zugriff stehen folgende Endpunkte zur Verfügung:
 
 - `GET /api/glossar/terms/` - Alle Glossar-Terme
 - `GET /api/glossar/terms/?category=Smart+Building` - Terme nach Kategorie
-- `GET /api/glossar/terms/{slug}/` - Einzelner Term
+- `GET /api/glossar/terms/<slug>/` - Einzelner Term
 - `GET /api/glossar/categories/` - Alle Kategorien
-- `GET /api/glossar/search/?q={query}` - Volltextsuche
+- `GET /api/glossar/search/?q=<query>` - Volltextsuche
 
 ## Zitierhinweis
 
