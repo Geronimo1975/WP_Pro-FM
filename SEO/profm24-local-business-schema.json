@@ -1,0 +1,126 @@
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://profm24.de/#organization",
+  "name": "PROFM24 - Facility Management Hamburg",
+  "alternateName": "PROFM24",
+  "description": "Professionelles Facility Management und Gebäudemanagement in Hamburg. Technische Wartung, Gebäudereinigung, Hausmeisterservice und Energiemanagement für Unternehmen.",
+  "url": "https://profm24.de",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://profm24.de/wp-content/uploads/logo-profm24.png",
+    "width": 300,
+    "height": 100
+  },
+  "image": [
+    "https://profm24.de/wp-content/uploads/profm24-facility-management.jpg",
+    "https://profm24.de/wp-content/uploads/profm24-team.jpg"
+  ],
+  "telephone": "+49-40-333-64450",
+  "email": "service@profm24.de",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Musterstraße 123",
+    "addressLocality": "Hamburg",
+    "addressRegion": "Hamburg",
+    "postalCode": "20095",
+    "addressCountry": "DE"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 53.5511,
+    "longitude": 9.9937
+  },
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Hamburg",
+      "@id": "https://www.wikidata.org/wiki/Q1055"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Eimsbüttel"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Altona"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Schnelsen"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Wandsbek"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Harburg"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bergedorf"
+    }
+  ],
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "08:00",
+      "closes": "17:30"
+    }
+  ],
+  "priceRange": "€€",
+  "currenciesAccepted": "EUR",
+  "paymentAccepted": "Rechnung, Überweisung, SEPA-Lastschrift",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Facility Management Dienstleistungen",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Technisches Gebäudemanagement",
+          "description": "Wartung, Inspektion und Instandhaltung technischer Gebäudeanlagen"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Gebäudereinigung",
+          "description": "Professionelle Unterhalts-, Glas- und Spezialreinigung für Gewerbeimmobilien"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Hausmeisterservice",
+          "description": "Zuverlässiger Hausmeisterservice für Ihre Immobilie in Hamburg"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Energiemanagement",
+          "description": "Energieoptimierung und Nachhaltigkeitslösungen für Gebäude"
+        }
+      }
+    ]
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "47",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "sameAs": [
+    "https://www.facebook.com/profm24",
+    "https://www.linkedin.com/company/profm24",
+    "https://www.instagram.com/profm24"
+  ]
+}
