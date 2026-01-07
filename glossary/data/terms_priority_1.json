@@ -1,0 +1,305 @@
+{
+  "priority_1_terms": [
+    {
+      "term": "Building Management System",
+      "term_en": "Building Management System",
+      "abbreviation": "BMS",
+      "category": "Smart Building & IoT"
+    },
+    {
+      "term": "Gebäudeleittechnik",
+      "term_en": "Building Automation System",
+      "abbreviation": "GLT",
+      "category": "Smart Building & IoT"
+    },
+    {
+      "term": "IoT-Gateway",
+      "term_en": "IoT Gateway",
+      "abbreviation": null,
+      "category": "Smart Building & IoT"
+    },
+    {
+      "term": "Digital Twin",
+      "term_en": "Digital Twin",
+      "abbreviation": null,
+      "category": "Smart Building & IoT"
+    },
+    {
+      "term": "Edge Computing",
+      "term_en": "Edge Computing",
+      "abbreviation": null,
+      "category": "Smart Building & IoT"
+    },
+    {
+      "term": "LoRaWAN",
+      "term_en": "LoRaWAN",
+      "abbreviation": null,
+      "category": "Smart Building & IoT"
+    },
+    {
+      "term": "Occupancy Sensor",
+      "term_en": "Occupancy Sensor",
+      "abbreviation": null,
+      "category": "Sensorik & Messtechnik"
+    },
+    {
+      "term": "Indoor Air Quality Monitoring",
+      "term_en": "Indoor Air Quality Monitoring",
+      "abbreviation": "IAQ",
+      "category": "Sensorik & Messtechnik"
+    },
+    {
+      "term": "Reinigungsroboter",
+      "term_en": "Cleaning Robot",
+      "abbreviation": null,
+      "category": "Robotik & Automatisierung"
+    },
+    {
+      "term": "Autonome Bodenreinigung",
+      "term_en": "Autonomous Floor Cleaning",
+      "abbreviation": null,
+      "category": "Robotik & Automatisierung"
+    },
+    {
+      "term": "Cobot",
+      "term_en": "Collaborative Robot",
+      "abbreviation": null,
+      "category": "Robotik & Automatisierung"
+    },
+    {
+      "term": "Drohneninspektion",
+      "term_en": "Drone Inspection",
+      "abbreviation": null,
+      "category": "Robotik & Automatisierung"
+    },
+    {
+      "term": "UV-C Desinfektionsroboter",
+      "term_en": "UV-C Disinfection Robot",
+      "abbreviation": null,
+      "category": "Robotik & Automatisierung"
+    },
+    {
+      "term": "Lidar-Navigation",
+      "term_en": "Lidar Navigation",
+      "abbreviation": null,
+      "category": "Robotik & Automatisierung"
+    },
+    {
+      "term": "Predictive Maintenance",
+      "term_en": "Predictive Maintenance",
+      "abbreviation": "PdM",
+      "category": "Predictive Maintenance"
+    },
+    {
+      "term": "Condition Monitoring",
+      "term_en": "Condition Monitoring",
+      "abbreviation": null,
+      "category": "Predictive Maintenance"
+    },
+    {
+      "term": "Schwingungsanalyse",
+      "term_en": "Vibration Analysis",
+      "abbreviation": null,
+      "category": "Predictive Maintenance"
+    },
+    {
+      "term": "Machine Learning Instandhaltung",
+      "term_en": "Machine Learning Maintenance",
+      "abbreviation": null,
+      "category": "Predictive Maintenance"
+    },
+    {
+      "term": "CAFM-Software",
+      "term_en": "CAFM Software",
+      "abbreviation": "CAFM",
+      "category": "CAFM & Digitalisierung"
+    },
+    {
+      "term": "Building Information Modeling",
+      "term_en": "Building Information Modeling",
+      "abbreviation": "BIM",
+      "category": "CAFM & Digitalisierung"
+    },
+    {
+      "term": "Integrated Workplace Management System",
+      "term_en": "Integrated Workplace Management System",
+      "abbreviation": "IWMS",
+      "category": "CAFM & Digitalisierung"
+    },
+    {
+      "term": "Digitaler Gebäudepass",
+      "term_en": "Digital Building Passport",
+      "abbreviation": null,
+      "category": "CAFM & Digitalisierung"
+    },
+    {
+      "term": "Mobile Workforce Management",
+      "term_en": "Mobile Workforce Management",
+      "abbreviation": null,
+      "category": "CAFM & Digitalisierung"
+    },
+    {
+      "term": "CO2-Sensor",
+      "term_en": "CO2 Sensor",
+      "abbreviation": null,
+      "category": "Sensorik & Messtechnik"
+    },
+    {
+      "term": "Temperatursensor",
+      "term_en": "Temperature Sensor",
+      "abbreviation": null,
+      "category": "Sensorik & Messtechnik"
+    },
+    {
+      "term": "Feuchtigkeitssensor",
+      "term_en": "Humidity Sensor",
+      "abbreviation": null,
+      "category": "Sensorik & Messtechnik"
+    },
+    {
+      "term": "Bewegungsmelder",
+      "term_en": "Motion Detector",
+      "abbreviation": "PIR",
+      "category": "Sensorik & Messtechnik"
+    },
+    {
+      "term": "Smart Meter",
+      "term_en": "Smart Meter",
+      "abbreviation": null,
+      "category": "Energiemanagement"
+    },
+    {
+      "term": "Lastspitzenmanagement",
+      "term_en": "Peak Load Management",
+      "abbreviation": null,
+      "category": "Energiemanagement"
+    },
+    {
+      "term": "Energiemonitoring",
+      "term_en": "Energy Monitoring",
+      "abbreviation": null,
+      "category": "Energiemanagement"
+    },
+    {
+      "term": "ISO 50001",
+      "term_en": "ISO 50001",
+      "abbreviation": null,
+      "category": "Energiemanagement"
+    },
+    {
+      "term": "ESG-Reporting",
+      "term_en": "ESG Reporting",
+      "abbreviation": "ESG",
+      "category": "ESG & Nachhaltigkeit"
+    },
+    {
+      "term": "EU-Taxonomie",
+      "term_en": "EU Taxonomy",
+      "abbreviation": null,
+      "category": "ESG & Nachhaltigkeit"
+    },
+    {
+      "term": "CRREM-Pfad",
+      "term_en": "CRREM Pathway",
+      "abbreviation": "CRREM",
+      "category": "ESG & Nachhaltigkeit"
+    },
+    {
+      "term": "GRESB-Rating",
+      "term_en": "GRESB Rating",
+      "abbreviation": "GRESB",
+      "category": "ESG & Nachhaltigkeit"
+    },
+    {
+      "term": "DGNB-Zertifizierung",
+      "term_en": "DGNB Certification",
+      "abbreviation": "DGNB",
+      "category": "ESG & Nachhaltigkeit"
+    },
+    {
+      "term": "LEED-Zertifizierung",
+      "term_en": "LEED Certification",
+      "abbreviation": "LEED",
+      "category": "ESG & Nachhaltigkeit"
+    },
+    {
+      "term": "CO2-Fußabdruck Gebäude",
+      "term_en": "Building Carbon Footprint",
+      "abbreviation": null,
+      "category": "ESG & Nachhaltigkeit"
+    },
+    {
+      "term": "Scope 1/2/3 Emissionen",
+      "term_en": "Scope 1/2/3 Emissions",
+      "abbreviation": null,
+      "category": "ESG & Nachhaltigkeit"
+    },
+    {
+      "term": "Circular Economy Bauwesen",
+      "term_en": "Circular Economy Construction",
+      "abbreviation": null,
+      "category": "ESG & Nachhaltigkeit"
+    },
+    {
+      "term": "Zutrittskontrollsystem",
+      "term_en": "Access Control System",
+      "abbreviation": null,
+      "category": "Sicherheitstechnik"
+    },
+    {
+      "term": "Biometrische Zugangskontrolle",
+      "term_en": "Biometric Access Control",
+      "abbreviation": null,
+      "category": "Sicherheitstechnik"
+    },
+    {
+      "term": "Brandmeldeanlage",
+      "term_en": "Fire Alarm System",
+      "abbreviation": "BMA",
+      "category": "Sicherheitstechnik"
+    },
+    {
+      "term": "Desk Sharing",
+      "term_en": "Desk Sharing",
+      "abbreviation": null,
+      "category": "Workplace & New Work"
+    },
+    {
+      "term": "Hybrid Work",
+      "term_en": "Hybrid Work",
+      "abbreviation": null,
+      "category": "Workplace & New Work"
+    },
+    {
+      "term": "Workplace Analytics",
+      "term_en": "Workplace Analytics",
+      "abbreviation": null,
+      "category": "Workplace & New Work"
+    },
+    {
+      "term": "Activity Based Working",
+      "term_en": "Activity Based Working",
+      "abbreviation": "ABW",
+      "category": "Workplace & New Work"
+    },
+    {
+      "term": "Service Level Agreement",
+      "term_en": "Service Level Agreement",
+      "abbreviation": "SLA",
+      "category": "Vertragsmanagement"
+    },
+    {
+      "term": "Key Performance Indicator",
+      "term_en": "Key Performance Indicator",
+      "abbreviation": "KPI",
+      "category": "Vertragsmanagement"
+    }
+  ],
+  "count": 50,
+  "metadata": {
+    "priority": 1,
+    "description": "Höchste Priorität - Smart Building, IoT, Robotik, ESG",
+    "estimated_search_volume": "50000+/month",
+    "created": "2026-01-07"
+  }
+}

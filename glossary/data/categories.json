@@ -1,0 +1,184 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Smart Building & IoT",
+      "slug": "smart-building-iot",
+      "description": "Gebäudeautomation, Sensoren, Vernetzung und intelligente Gebäudesteuerung",
+      "icon": "building-2",
+      "color": "#0066CC",
+      "target_terms": 50,
+      "priority": 1,
+      "keywords": ["smart building", "iot gebäude", "gebäudeautomation", "vernetzte gebäude"]
+    },
+    {
+      "id": 2,
+      "name": "Robotik & Automatisierung",
+      "slug": "robotik-automatisierung",
+      "description": "Reinigungsroboter, Drohnen, autonome Systeme und kollaborative Roboter",
+      "icon": "robot",
+      "color": "#00AA55",
+      "target_terms": 35,
+      "priority": 1,
+      "keywords": ["reinigungsroboter", "automatisierung fm", "serviceroboter", "drohnen gebäude"]
+    },
+    {
+      "id": 3,
+      "name": "Sensorik & Messtechnik",
+      "slug": "sensorik-messtechnik",
+      "description": "Sensoren, Monitoring, Datenerfassung und Messgeräte für Gebäude",
+      "icon": "cpu",
+      "color": "#FF6600",
+      "target_terms": 40,
+      "priority": 1,
+      "keywords": ["sensoren gebäude", "monitoring", "messtechnik fm", "datenerfassung"]
+    },
+    {
+      "id": 4,
+      "name": "Gebäudetechnik (TGA)",
+      "slug": "gebaeudetechnik-tga",
+      "description": "HVAC, Elektro, Sanitär, Aufzüge und technische Gebäudeausrüstung",
+      "icon": "settings",
+      "color": "#666666",
+      "target_terms": 45,
+      "priority": 2,
+      "keywords": ["tga", "gebäudetechnik", "hvac", "haustechnik"]
+    },
+    {
+      "id": 5,
+      "name": "Energiemanagement",
+      "slug": "energiemanagement",
+      "description": "Energieeffizienz, erneuerbare Energien, Smart Grid und Verbrauchsoptimierung",
+      "icon": "zap",
+      "color": "#FFCC00",
+      "target_terms": 40,
+      "priority": 1,
+      "keywords": ["energiemanagement", "energieeffizienz gebäude", "smart meter", "energieoptimierung"]
+    },
+    {
+      "id": 6,
+      "name": "Sicherheitstechnik",
+      "slug": "sicherheitstechnik",
+      "description": "Zutrittskontrolle, Brandschutz, Überwachung und Sicherheitssysteme",
+      "icon": "shield",
+      "color": "#CC0000",
+      "target_terms": 35,
+      "priority": 2,
+      "keywords": ["zutrittskontrolle", "brandschutz", "sicherheitstechnik", "überwachung"]
+    },
+    {
+      "id": 7,
+      "name": "Gebäudereinigung",
+      "slug": "gebaeudereinigung",
+      "description": "Unterhaltsreinigung, Spezialreinigung und professionelle Reinigungsdienste",
+      "icon": "sparkles",
+      "color": "#00CCCC",
+      "target_terms": 40,
+      "priority": 2,
+      "keywords": ["gebäudereinigung", "unterhaltsreinigung", "büroreinigung", "industriereinigung"]
+    },
+    {
+      "id": 8,
+      "name": "Grünflächenpflege",
+      "slug": "gruenflaechenpflege",
+      "description": "Außenanlagen, Gartenpflege, Winterdienst und Landschaftspflege",
+      "icon": "trees",
+      "color": "#228B22",
+      "target_terms": 25,
+      "priority": 3,
+      "keywords": ["grünflächenpflege", "außenanlagen", "winterdienst", "gartenpflege"]
+    },
+    {
+      "id": 9,
+      "name": "Catering & Services",
+      "slug": "catering-services",
+      "description": "Verpflegung, Empfangsdienste, Postdienste und Supportservices",
+      "icon": "coffee",
+      "color": "#8B4513",
+      "target_terms": 20,
+      "priority": 3,
+      "keywords": ["catering unternehmen", "empfangsservice", "facility services"]
+    },
+    {
+      "id": 10,
+      "name": "CAFM & Digitalisierung",
+      "slug": "cafm-digitalisierung",
+      "description": "CAFM-Software, BIM, Digital Twin und digitale FM-Lösungen",
+      "icon": "monitor",
+      "color": "#9933FF",
+      "target_terms": 45,
+      "priority": 1,
+      "keywords": ["cafm", "facility management software", "bim", "digital twin"]
+    },
+    {
+      "id": 11,
+      "name": "Flächenmanagement",
+      "slug": "flaechenmanagement",
+      "description": "Belegungsplanung, Workplace Management und Flächenoptimierung",
+      "icon": "layout",
+      "color": "#FF69B4",
+      "target_terms": 30,
+      "priority": 2,
+      "keywords": ["flächenmanagement", "belegungsplanung", "workplace", "büroplanung"]
+    },
+    {
+      "id": 12,
+      "name": "Vertragsmanagement",
+      "slug": "vertragsmanagement",
+      "description": "SLA, Outsourcing, Procurement und Dienstleistersteuerung",
+      "icon": "file-text",
+      "color": "#4169E1",
+      "target_terms": 25,
+      "priority": 3,
+      "keywords": ["sla fm", "outsourcing", "vertragsmanagement", "dienstleistersteuerung"]
+    },
+    {
+      "id": 13,
+      "name": "ESG & Nachhaltigkeit",
+      "slug": "esg-nachhaltigkeit",
+      "description": "CO2-Management, Zertifizierungen, Green Building und Nachhaltigkeitsstrategien",
+      "icon": "leaf",
+      "color": "#32CD32",
+      "target_terms": 40,
+      "priority": 1,
+      "keywords": ["esg immobilien", "nachhaltigkeit gebäude", "green building", "co2 reduktion"]
+    },
+    {
+      "id": 14,
+      "name": "Predictive Maintenance",
+      "slug": "predictive-maintenance",
+      "description": "Vorausschauende Wartung, Condition Monitoring, KI und Machine Learning",
+      "icon": "activity",
+      "color": "#FF4500",
+      "target_terms": 35,
+      "priority": 1,
+      "keywords": ["predictive maintenance", "vorausschauende wartung", "condition monitoring", "instandhaltung"]
+    },
+    {
+      "id": 15,
+      "name": "Workplace & New Work",
+      "slug": "workplace-new-work",
+      "description": "Hybrid Work, Desk Sharing, Employee Experience und moderne Arbeitsplatzkonzepte",
+      "icon": "users",
+      "color": "#DA70D6",
+      "target_terms": 30,
+      "priority": 2,
+      "keywords": ["new work", "hybrid work", "desk sharing", "workplace management"]
+    }
+  ],
+  "target_distribution": {
+    "A": 35, "B": 30, "C": 25, "D": 30, "E": 30,
+    "F": 35, "G": 35, "H": 25, "I": 25, "J": 5,
+    "K": 30, "L": 25, "M": 30, "N": 20, "O": 15,
+    "P": 30, "Q": 3, "R": 25, "S": 50, "T": 25,
+    "U": 15, "V": 20, "W": 25, "X": 2, "Y": 2, "Z": 15
+  },
+  "total_target": 535,
+  "metadata": {
+    "language": "de",
+    "region": "Deutschland",
+    "website": "profm24.de",
+    "created": "2026-01-07",
+    "version": "1.0"
+  }
+}

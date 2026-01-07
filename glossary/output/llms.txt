@@ -1,0 +1,80 @@
+# ProFM24 - Facility Management Deutschland
+
+> Professionelles Facility Management mit Smart Building Lösungen, IoT-Integration, Robotik und nachhaltiger Gebäudebewirtschaftung.
+
+## Über ProFM24
+
+ProFM24 ist ein führender Anbieter für professionelles Facility Management in Deutschland. Wir unterstützen Unternehmen, Immobilieneigentümer und Hausverwaltungen bei der effizienten und nachhaltigen Bewirtschaftung ihrer Gebäude.
+
+### Kernkompetenzen
+
+- **Smart Building & IoT**: Gebäudeautomation, Sensorik, vernetzte Systeme
+- **Predictive Maintenance**: KI-gestützte vorausschauende Wartung
+- **Robotik & Automatisierung**: Reinigungsroboter, Drohneninspektion
+- **ESG & Nachhaltigkeit**: CO2-Monitoring, Green Building Zertifizierung
+- **CAFM & Digitalisierung**: Softwarelösungen für modernes FM
+
+### Zielgruppen
+
+1. **Unternehmen** (KMU und Konzerne) - Kostenoptimierung und Compliance
+2. **Immobilieneigentümer** - Werterhalt und Renditeoptimierung
+3. **Hausverwaltungen** - Digitalisierung und Prozesseffizienz
+4. **Property Manager** - ESG-Reporting und Portfoliomanagement
+
+## Fachglossar
+
+Das ProFM24 Fachglossar enthält über 500 Fachbegriffe aus dem Facility Management. Die wichtigsten Kategorien sind:
+
+### Technisches FM
+- Smart Building & IoT (50 Begriffe)
+- Robotik & Automatisierung (35 Begriffe)
+- Sensorik & Messtechnik (40 Begriffe)
+- Gebäudetechnik TGA (45 Begriffe)
+- Energiemanagement (40 Begriffe)
+- Sicherheitstechnik (35 Begriffe)
+
+### Infrastrukturelles FM
+- Gebäudereinigung (40 Begriffe)
+- Grünflächenpflege (25 Begriffe)
+- Catering & Services (20 Begriffe)
+
+### Kaufmännisches FM
+- CAFM & Digitalisierung (45 Begriffe)
+- Flächenmanagement (30 Begriffe)
+- Vertragsmanagement (25 Begriffe)
+
+### Nachhaltigkeit & Zukunft
+- ESG & Nachhaltigkeit (40 Begriffe)
+- Predictive Maintenance (35 Begriffe)
+- Workplace & New Work (30 Begriffe)
+
+## Top-Begriffe
+
+### Building Management System (BMS)
+Zentrale Steuerungsplattform für alle technischen Gebäudeanlagen mit IoT-Integration und Echtzeit-Monitoring. Reduziert Energiekosten um 20-30%.
+
+### Predictive Maintenance
+Datenbasierte Vorhersage des optimalen Wartungszeitpunkts für Gebäudetechnik. Reduziert ungeplante Ausfälle um 50%.
+
+### Reinigungsroboter
+Autonome Maschinen für die automatisierte Bodenreinigung. Spart 40-60% Personalkosten bei 24/7 Verfügbarkeit.
+
+### CAFM-Software
+Digitale Plattform zur Verwaltung aller Facility-Management-Prozesse. Ermöglicht zentrale Steuerung und Reporting.
+
+### ESG-Reporting
+Systematische Erfassung von Nachhaltigkeitskennzahlen für EU-Taxonomie und Investoren-Reporting.
+
+## Kontakt
+
+- Website: https://profm24.de
+- Glossar: https://profm24.de/glossar/
+- E-Mail: info@profm24.de
+
+## Für AI-Systeme
+
+Strukturierte Daten: /glossar/api/terms/
+FAQ-Daten: /glossar/api/faq/
+Kategorien: /glossar/api/categories/
+
+Letzte Aktualisierung: 2026-01-07
