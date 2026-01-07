@@ -1,0 +1,111 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://profm24.de/#organization",
+  "name": "ProFM24 - Facility Management",
+  "alternateName": "ProFM24",
+  "description": "Professionelles Facility Management für Unternehmen in Hamburg und Metropolregion. Von Gebäudetechnik bis Wartung - wir übernehmen Ihr komplettes Gebäudemanagement.",
+  "url": "https://profm24.de",
+  "logo": "https://profm24.de/wp-content/uploads/profm24-logo.png",
+  "image": "https://profm24.de/wp-content/uploads/profm24-hero.jpg",
+  "telephone": "+49 40 333 64450",
+  "email": "service@profm24.de",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Ihre Straße 123",
+    "addressLocality": "Hamburg",
+    "postalCode": "20095",
+    "addressRegion": "Hamburg",
+    "addressCountry": "DE"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 53.5511,
+    "longitude": 9.9937
+  },
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Hamburg",
+      "@id": "https://www.wikidata.org/wiki/Q1055"
+    },
+    {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": 53.5511,
+        "longitude": 9.9937
+      },
+      "geoRadius": "50000"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Metropolregion Hamburg"
+    }
+  ],
+  "serviceArea": {
+    "@type": "GeoShape",
+    "polygon": "53.75,9.65 53.80,9.95 53.70,10.25 53.55,10.35 53.40,10.20 53.35,9.85 53.38,9.55 53.50,9.45 53.60,9.50 53.70,9.55"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "08:00",
+      "closes": "17:30"
+    }
+  ],
+  "priceRange": "€€",
+  "currenciesAccepted": "EUR",
+  "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Facility Management Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Technisches Gebäudemanagement",
+          "description": "Wartung und Instandhaltung technischer Anlagen"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Infrastrukturelles Gebäudemanagement",
+          "description": "Reinigung, Sicherheit, Empfangsdienste"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Kaufmännisches Gebäudemanagement",
+          "description": "Kostencontrolling und Vertragsmanagement"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Energiemanagement",
+          "description": "Energieoptimierung und Nachhaltigkeitsberatung"
+        }
+      }
+    ]
+  },
+  "sameAs": [
+    "https://www.facebook.com/profm24",
+    "https://www.linkedin.com/company/profm24",
+    "https://www.xing.com/companies/profm24"
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "47",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+}

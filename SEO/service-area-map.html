@@ -1,0 +1,118 @@
+<!-- ProFM24 Service Area Map - Hamburg Region -->
+<!-- Embed this in WordPress using Custom HTML block or shortcode -->
+
+<div id="profm24-service-map" style="width: 100%; height: 450px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+(function() {
+    // Hamburg center coordinates
+    const hamburgCenter = [53.5511, 9.9937];
+
+    // Initialize map
+    const map = L.map('profm24-service-map').setView(hamburgCenter, 10);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // ProFM24 office marker
+    const officeIcon = L.divIcon({
+        className: 'profm24-marker',
+        html: '<div style="background: #0066CC; color: white; padding: 8px 12px; border-radius: 20px; font-weight: bold; white-space: nowrap; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">ProFM24</div>',
+        iconSize: [80, 30],
+        iconAnchor: [40, 15]
+    });
+
+    L.marker(hamburgCenter, {icon: officeIcon})
+        .addTo(map)
+        .bindPopup('<strong>ProFM24</strong><br>Facility Management Hamburg<br><a href="tel:+494033364450">040 333 64450</a>');
+
+    // Service area polygon - Hamburg metropolitan region
+    const serviceArea = [
+        [53.75, 9.65],   // Norderstedt
+        [53.80, 9.95],   // Ahrensburg area
+        [53.70, 10.25],  // Reinbek
+        [53.55, 10.35],  // Bergedorf
+        [53.40, 10.20],  // Harburg East
+        [53.35, 9.85],   // Harburg South
+        [53.38, 9.55],   // Buxtehude area
+        [53.50, 9.45],   // Wedel
+        [53.60, 9.50],   // Pinneberg
+        [53.70, 9.55],   // Quickborn
+    ];
+
+    // Draw service area
+    L.polygon(serviceArea, {
+        color: '#0066CC',
+        weight: 3,
+        fillColor: '#0066CC',
+        fillOpacity: 0.15,
+        dashArray: '10, 5'
+    }).addTo(map).bindPopup('<strong>ProFM24 Servicegebiet</strong><br>Hamburg und Metropolregion');
+
+    // Service area circle (50km radius)
+    L.circle(hamburgCenter, {
+        radius: 50000, // 50km
+        color: '#FF6B00',
+        weight: 2,
+        fillColor: '#FF6B00',
+        fillOpacity: 0.05,
+        dashArray: '5, 10'
+    }).addTo(map);
+
+    // Cities/districts markers
+    const districts = [
+        { name: 'Altona', coords: [53.5503, 9.9356] },
+        { name: 'Eimsbüttel', coords: [53.5744, 9.9519] },
+        { name: 'Hamburg-Nord', coords: [53.6025, 10.0142] },
+        { name: 'Wandsbek', coords: [53.5833, 10.0833] },
+        { name: 'Bergedorf', coords: [53.4833, 10.2167] },
+        { name: 'Harburg', coords: [53.4608, 9.9847] },
+        { name: 'Norderstedt', coords: [53.7064, 9.9931] },
+        { name: 'Pinneberg', coords: [53.6558, 9.7967] },
+        { name: 'Ahrensburg', coords: [53.6756, 10.2411] },
+        { name: 'Buxtehude', coords: [53.4747, 9.6864] },
+    ];
+
+    districts.forEach(d => {
+        L.circleMarker(d.coords, {
+            radius: 6,
+            color: '#0066CC',
+            fillColor: '#fff',
+            fillOpacity: 1,
+            weight: 2
+        }).addTo(map).bindTooltip(d.name, {permanent: false, direction: 'top'});
+    });
+
+    // Legend
+    const legend = L.control({position: 'bottomright'});
+    legend.onAdd = function(map) {
+        const div = L.DomUtil.create('div', 'legend');
+        div.style.cssText = 'background: white; padding: 10px 15px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); font-size: 12px;';
+        div.innerHTML = `
+            <strong style="display:block; margin-bottom:8px;">Servicegebiet</strong>
+            <div style="margin: 4px 0;"><span style="display:inline-block; width:20px; height:3px; background:#0066CC; margin-right:8px; vertical-align:middle;"></span>Kerngebiet</div>
+            <div style="margin: 4px 0;"><span style="display:inline-block; width:20px; height:3px; background:#FF6B00; margin-right:8px; vertical-align:middle;"></span>Erweitertes Gebiet (50km)</div>
+        `;
+        return div;
+    };
+    legend.addTo(map);
+})();
+</script>
+
+<style>
+#profm24-service-map {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+.leaflet-popup-content {
+    font-size: 14px;
+    line-height: 1.5;
+}
+.leaflet-popup-content a {
+    color: #0066CC;
+}
+</style>
